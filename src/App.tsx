@@ -1,32 +1,24 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Book from './components/book';
-import CommentList from './components/commentList';
-import Footer from './components/footer';
-import Header from './components/header';
-import MenuSection from './components/menuSection';
-import Navbar from './components/navbar';
-import Section from './components/section';
+import Footer from "./components/footer";
+import Navbar from "./components/navbar";
+import routes from './routes';
+import NotFound from './pages/notFound';
 
 function App() {
   return (
-    <div className='max-w-5xl mx-auto'>
-      <Navbar/>
-      <Header/>
-      <Section>
-        <div>
-          <img src="/794a4fda36a64b7fafd20fbcb5971633-768x768.webp" alt="" />
-        </div>
-        <MenuSection/> 
-      </Section>
-      <Section>
-        <Book/>
-        <div>
-          <img src="Puerto-Vallarta-restaurante-mexicano-porfirios.jpeg" alt="" />
-        </div>
-      </Section>
-      <CommentList/>
-      <Footer/>
-    </div>
+    <BrowserRouter>
+      <div className="">
+        <Navbar />
+        <Routes >
+          {routes.map(({path, component},id)=> (
+            <Route path={path} Component={component} key={id}  />
+          ))}
+          <Route path="*" element={<NotFound/>} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
